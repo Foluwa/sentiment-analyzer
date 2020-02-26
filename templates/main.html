@@ -1,0 +1,36 @@
+{% extends 'layouts.html' %}
+<div class="container">
+    {% block body %}
+    <div>
+        <form action="" method="POST">
+            <input name="search_query" class="form-control" value={{request.form.search_query}}>
+            <input type="submit" value="Search">
+        </form>
+    </div><br><br>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <label> Select the plot type....</label>
+            <select class="form-control" id='first_cat'>
+                <option value="Bar">Bar</option>
+                <option value="Scatter">Scatter</option>
+                <option value="Chart">Chart</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="chart" id="bargraph">
+                <script>
+                    var graphs = {{ plot | safe}};
+                    Plotly.plot('bargraph', graphs, {});
+                </script>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h1>DATA TABLE</h1>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
