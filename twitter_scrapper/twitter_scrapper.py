@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, render_template, request, flash, redirect, Response
-#  Get tweets from twitter and save to csv
 import tweepy
 import csv 
 from textblob import TextBlob
@@ -10,7 +9,6 @@ import tweepy
 import csv 
 
 import plotly.graph_objects as go
-
 import datetime
 now = datetime.datetime.now()
 prefix = now.strftime("%Y-%m-%d-%H:%M:%S")
@@ -33,16 +31,13 @@ class TwitterStreamListner():
     # print(message)
     def ConvertTweetToCSV(self,message):
         search_query = message
-        thislist = []
-
+        sentiment_list = []
         self.message = message
+        self.sentiment_list = sentiment_list
+        type(self.sentiment_list)
 
-        self.thislist = thislist
-        type(self.thislist)
-
-        # Open/create a file to append data to
-        csvFile = open('{search_query}.csv'.format(search_query=search_query), 'a')
         #Using python csv writer
+        csvFile = open('{search_query}.csv'.format(search_query=search_query), 'a')
         csvWriter = csv.writer(csvFile)
         csvWriter.writerow(["USERID", "USERNAME", "USERFOLLOWERS", "TEXT", "CREATED", "POLARITY", "SUBJECTIVITY", "SENTIMENT"])
 
@@ -55,37 +50,30 @@ class TwitterStreamListner():
             # https://textblob.readthedocs.io/en/dev/quickstart.html#sentiment-analysis
             # Subjective sentences generally refer to personal opinion, emotion or judgment
             # Objective refers to factual information. 
-            if (tweet_details.polarity >= 0.3):
+
+            if (tweet_details.polarity >= 0.2):
                 sentiment='POSITIVE'
-            elif (tweet_details.polarity >= 0.1):
+            elif (tweet_details.polarity == 0):
                 sentiment='NEUTRAL'
             else:
                 sentiment='NEGATIVE'
-            # Write a row to the CSV file. I use encode UTF-8
-            csvWriter.writerow([tweet.id, tweet.user.screen_name, tweet.user.followers_count, tweet.text, tweet.created_at, 
-                                tweet_details.polarity, tweet_details.subjectivity, sentiment])
+            # Write a row to the CSV file.
+            csvWriter.writerow([tweet.id, tweet.user.screen_name, tweet.user.followers_count, tweet.text, tweet.created_at,tweet_details.polarity, tweet_details.subjectivity, sentiment])
         csvFile.close()
 
-        search_query_csv= '{search_query}.csv'.format(search_query=search_query)
-        print('The search query', search_query_csv)
+        search_query_csv_file= '{search_query}.csv'.format(search_query=search_query)
+        print('The search query', search_query_csv_file)
 
         #DEALING WITH THE CSV
-        df = pd.read_csv(search_query_csv)
+        df = pd.read_csv(search_query_csv_file)
+        sentiment_list = df['SENTIMENT'].value_counts()
+        print(sentiment_list)
 
-        thislist = df['SENTIMENT'].value_counts()
-        print(thislist)
-        neg = thislist.NEGATIVE
-        neg = int(neg)
-        neu = thislist.NEUTRAL 
-        neu = int(neu)
-        pos = thislist.POSITIVE  
-        pos = int(pos)
-        print('NEGA ', neg, 'NEUT ', neu, 'POSI ', pos) 
-    
-        print('______________________********______________________')
-        print('thislist.to_json() ', thislist.to_json())
-        print('______________________--------______________________')
-        thislist = thislist.to_json()
-        print('this list JSON IS ', thislist)
-        
-        return neu, neg, pos
+        #TODO: Handle exception for when there are no values for negative or positive or neutral as in case for 'zeezahdevs' query 
+        negative  = sentiment_list.NEGATIVE
+        neutral = sentiment_list.NEUTRAL 
+        positive = sentiment_list.POSITIVE  
+        negative  = int(negative)
+        neutral = int(neutral)
+        positive = int(positive) 
+        return neutral, negative, positive
