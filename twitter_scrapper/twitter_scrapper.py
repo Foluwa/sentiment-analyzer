@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template,request,flash, redirect
+from flask import Flask, jsonify, render_template, request, flash, redirect
 #  Get tweets from twitter and save to csv
 import tweepy
 import csv 
@@ -8,6 +8,8 @@ import numpy as np
 import json
 import tweepy
 import csv 
+
+import plotly.graph_objects as go
 
 import datetime
 now = datetime.datetime.now()
@@ -63,28 +65,14 @@ class TwitterStreamListner():
         print('The search query', search_query_csv)
 
         #DEALING WITH THE CSV
-        data = pd.read_csv(search_query_csv)
-        print(data.count())
-        print('Result-----',data[data == 'POSITIVE'].count())
+        df = pd.read_csv(search_query_csv)
+        thislist = []
+        thislist = df['SENTIMENT'].value_counts()
+        print(thislist)
+        neg = thislist.NEGATIVE
+        neu = thislist.NEUTRAL 
+        pos = thislist.POSITIVE  
+        print('NEGA ', neg, 'NEUT ', neu, 'POSI ', pos) 
+    
         print('______________________********______________________')
-        #data.SENTIMENT.str.split(expand=True).stack().value_counts()
-
-        arr_data = data.to_numpy()
-        print('ARR DATA IS ',arr_data[0][7])
-
-        return render_template('main.html')
-
-
-
-
-        # if feature == 'Bar':
-        #     N = 40
-        #     x = np.linspace(0, 1, N)
-        #     y = np.random.randn(N)+10
-        #     df = pd.DataFrame({'x': x, 'y': y}) # creating a sample dataframe
-        #     data = [
-        #         go.Bar(
-        #             x=df['x'], # assign x as the dataframe column 'x'
-        #             y=df['y']
-        #         )
-        #     ]
+        return 

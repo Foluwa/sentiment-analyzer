@@ -11,16 +11,49 @@ from textblob import TextBlob
 import pandas as pd
 import numpy as np
 import json
+#  Get tweets from twitter and save to csv
 import tweepy
 import csv 
-from collections import Counter
 
 import datetime
 now = datetime.datetime.now()
 prefix = now.strftime("%Y-%m-%d-%H:%M:%S")
 
-from twitter_scrapper.twitter_scrapper import TwitterStreamListner 
-tsl = TwitterStreamListner()
+ACCESS_TOKEN = "465633653-x7NHimVAVuMGieuVi9GIRFL8TcuCFUxSQ4NjIdHR"
+ACCESS_TOKEN_SECRET = "hSwFbdEv906tsZ67igSuKXrR8kh3yg1CDg2ElVo9ZO7dK"
+CONSUMER_KEY = "VoPZQmgqLLn9fO3TdSVgdza6q"
+CONSUMER_SECRET = "F1HEnesPeHSn514KYJNRbBFQumbRmrCf74IPsEKXJhIttj3aMT"
+
+
+auth = tweepy.auth.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+api = tweepy.API(auth)
+
+class TwitterStreamListner():
+# Method to open a file and append data to that specific file
+    # print(message)
+    def ConvertTweetToCSV(self,message):
+        search_query = message
+        print('this is me',search_query)
+        def __init__(self, message):
+            self.message = message
+            print('foluwa ',search_query)
+        # Open/create a file to append data to
+        csvFile = open('{search_query}.csv'.format(search_query=search_query), 'a')
+        #Use csv writer
+        csvWriter = csv.writer(csvFile)
+        csvWriter.writerow(["USERID", "USERNAME", "USERFOLLOWERS", "TEXT", "CREATED", "ENCODE"])
+
+        for tweet in tweepy.Cursor(api.search,
+                                q = ['{search_query}'.format(search_query=search_query)],
+                                since = "2020-02-02",
+                                until = "2020-02-26",
+                                lang = "en").items():
+            # Write a row to the CSV file. I use encode UTF-8
+            csvWriter.writerow([tweet.id,tweet.user.screen_name,tweet.user.followers_count,tweet.text, tweet.created_at, tweet.text.encode('utf-8')])
+            print (tweet.created_at, tweet.text)
+        csvFile.close()
+
 
 
 
@@ -94,16 +127,16 @@ def change_features():
     graphJSON= create_plot(feature)
     return graphJSON
 
-@app.route('/about')
-def about():
-    return render_template('page.html')
 
-@app.route('/textblob/api/<message>')
+@app.route('/api/<message>')
 def sentiment(message):
-    tsl.ConvertTweetToCSV(message)
-    
-    return render_template('page.html')    
-
+        tsl = TwitterStreamListner()
+        tsl.ConvertTweetToCSV(message)
+        
+        # text = TextBlob(message)
+        # response = {'polarity' : text.polarity , 'subjectivity' : text.subjectivity}
+        # print(response)
+        return 'hello' #jsonify(response)
 
 
 
