@@ -45,7 +45,26 @@ def index():
 #     print(search_query)
 
 #     return render_template('main.html', plot=bar)
-    
+
+
+@app.route('/bar', methods=['GET', 'POST'])
+def change_features():
+
+    feature = request.args['selected']
+    graphJSON= create_plot(feature)
+    return graphJSON
+
+@app.route('/textblob/api',  methods=['GET', 'POST'])
+def sentiment():
+    if request.method == 'POST':
+        message = request.form['message']
+        neu, neg, pos = tsl.ConvertTweetToCSV(message)
+        print('NEU  ', neu, neg,pos)
+    else:
+        return render_template('page.html')
+    return  jsonify({'negative':neg, 'neutral':neu, 'positive':pos})
+
+
 
 def create_plot(feature):
     if feature == 'Bar':
@@ -86,26 +105,6 @@ def create_plot(feature):
     graphJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
 
     return graphJSON
-
-@app.route('/bar', methods=['GET', 'POST'])
-def change_features():
-
-    feature = request.args['selected']
-    graphJSON= create_plot(feature)
-    return graphJSON
-
-@app.route('/about')
-def about():
-    return render_template('page.html')
-
-@app.route('/textblob/api/<message>')
-def sentiment(message):
-    neu, neg, pos = tsl.ConvertTweetToCSV(message)
-    print('NEU  ', neu, neg,pos)
-    return  jsonify({'negative':neg, 'neutral':neu, 'positive':pos})
-
-
-
 
 
 

@@ -15,7 +15,49 @@
 <link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
 <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
 <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
-<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+	<!-- Load plotly.js into the DOM -->
+	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script>
+$(document).ready(function() {
+$('form').on('submit', function(event) {
+    var search_query = $('#search_query').val();
+    event.preventDefault();
+    console.log(search_query)
+    $.ajax({
+        data : {
+            message : search_query,
+        },
+        type : 'POST',
+        url : 'http://localhost:5000/textblob/api',
+        success: function(response){
+                console.log(response.negative, response.positive, response.neutral);
+
+                var data = [{
+                x:['Negative', 'Positive', 'Neutral'], 
+                y: [response.negative, response.positive, response.neutral],
+                type: 'bar'}]
+
+                var layout = {
+                title: 'Haptics Twitter Sentiment',
+                showlegend: false}
+
+                Plotly.newPlot('myDiv', data, layout, {modeBarButtonsToRemove: ['toImage']})
+
+			},
+		error: function(error){
+				console.log(error);
+			}
+    })
+    console.log('The response is1 '+response);
+
+
+    });
+    event.preventDefault();
+});
+
+
+</script>
 <meta name="theme-color" content="#563d7c">
     <title>Flask App</title>
 </head>
@@ -24,10 +66,11 @@
     {% include 'includes/_navbar.html' %}
     <div class="container" style="padding-top: 5em;">
         {% include 'includes/_messages.html' %}
+        <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
         {% block body%} {% endblock%}
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
     <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
