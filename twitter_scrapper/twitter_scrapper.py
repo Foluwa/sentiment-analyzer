@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, flash, redirect
+from flask import Flask, jsonify, render_template, request, flash, redirect, Response
 #  Get tweets from twitter and save to csv
 import tweepy
 import csv 
@@ -26,22 +26,29 @@ auth = tweepy.auth.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
+app = Flask(__name__)
+
+
 class TwitterStreamListner():
+    
 # Method to open a file and append data to that specific file
     # print(message)
     def ConvertTweetToCSV(self,message):
         search_query = message
+        thislist = []
 
-        def __init__(self, message):
-            self.message = message
+        self.message = message
+
+        self.thislist = thislist
+        type(self.thislist)
 
         # Open/create a file to append data to
         csvFile = open('{search_query}.csv'.format(search_query=search_query), 'a')
         #Using python csv writer
         csvWriter = csv.writer(csvFile)
-        csvWriter.writerow(["USERID", "USERNAME", "USERFOLLOWERS", "TEXT", "CREATED", "POLARITY", "SUBJECTIVITY", "SENTIMENT","ENCODE"])
+        csvWriter.writerow(["USERID", "USERNAME", "USERFOLLOWERS", "TEXT", "CREATED", "POLARITY", "SUBJECTIVITY", "SENTIMENT"])
 
-        for tweet in tweepy.Cursor(api.search,q = ['{search_query}'.format(search_query=search_query)], since = "2020-02-02",until = "2020-02-26",lang = "en").items():
+        for tweet in tweepy.Cursor(api.search,q = ['{search_query}'.format(search_query=search_query)], since = "2020-02-20",until = "2020-02-28",lang = "en").items():
 
             print (tweet.created_at, tweet.text)
             tweet_details= TextBlob(tweet.text)
@@ -58,7 +65,7 @@ class TwitterStreamListner():
                 sentiment='NEGATIVE'
             # Write a row to the CSV file. I use encode UTF-8
             csvWriter.writerow([tweet.id, tweet.user.screen_name, tweet.user.followers_count, tweet.text, tweet.created_at, 
-                                tweet_details.polarity, tweet_details.subjectivity, sentiment ,tweet.text.encode('utf-8')])
+                                tweet_details.polarity, tweet_details.subjectivity, sentiment])
         csvFile.close()
 
         search_query_csv= '{search_query}.csv'.format(search_query=search_query)
@@ -66,13 +73,21 @@ class TwitterStreamListner():
 
         #DEALING WITH THE CSV
         df = pd.read_csv(search_query_csv)
-        thislist = []
+
         thislist = df['SENTIMENT'].value_counts()
         print(thislist)
         neg = thislist.NEGATIVE
+        neg = int(neg)
         neu = thislist.NEUTRAL 
+        neu = int(neu)
         pos = thislist.POSITIVE  
+        pos = int(pos)
         print('NEGA ', neg, 'NEUT ', neu, 'POSI ', pos) 
     
         print('______________________********______________________')
-        return 
+        print('thislist.to_json() ', thislist.to_json())
+        print('______________________--------______________________')
+        thislist = thislist.to_json()
+        print('this list JSON IS ', thislist)
+        
+        return neu, neg, pos

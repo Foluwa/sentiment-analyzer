@@ -100,9 +100,10 @@ def about():
 
 @app.route('/textblob/api/<message>')
 def sentiment(message):
-    tsl.ConvertTweetToCSV(message)
-    
-    return render_template('page.html')    
+    neu, neg, pos = tsl.ConvertTweetToCSV(message)
+    print('NEU  ', neu, neg,pos)
+    return  jsonify({'negative':neg, 'neutral':neu, 'positive':pos})
+
 
 
 
