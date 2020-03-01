@@ -1,18 +1,25 @@
 {% extends 'layouts.html' %}
-<div class="container">
-    {% block body %}
+{% block body %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="row">
-        <div class="col-sm-12">
-            <h1>page</h1>
+        <div class="col-sm-2">
             <form method="POST">
-            <input id="search_query" class="" value="" name="message"/>
-            <button type="submit" id="search_button" value="Search">Search</button>
-        </form>
+                <input id="search_query" class="" value="" name="message" />
+                <button type="submit" id="search_button" value="Search">Search</button>
+            </form>
         </div>
     </div>
-</div>
-<!-- http://localhost:5000/textblob/api/HapticsNG -->
+    <div class="row">
+        <div class="col-sm-4">
+            <div id='myDiv'>
+                <!-- Plotly chart will be drawn inside this DIV -->
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- http://localhost:5000/textblob/api/HapticsNG -->
 
+</main>
 
 
 {% endblock %}

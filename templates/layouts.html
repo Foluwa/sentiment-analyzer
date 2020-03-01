@@ -6,70 +6,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-        <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
-	<!-- Load plotly.js into the DOM -->
-	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script>
-$(document).ready(function() {
-$('form').on('submit', function(event) {
-    var search_query = $('#search_query').val();
-    event.preventDefault();
-    console.log(search_query)
-    $.ajax({
-        data : {
-            message : search_query,
-        },
-        type : 'POST',
-        url : 'http://localhost:5000/textblob/api',
-        success: function(response){
-                console.log(response.negative, response.positive, response.neutral);
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('form').on('submit', function (event) {
+                var search_query = $('#search_query').val();
+                event.preventDefault();
+                console.log(search_query)
+                $.ajax({
+                    data: {
+                        message: search_query,
+                    },
+                    type: 'POST',
+                    url: 'http://localhost:5000/textblob/api',
+                    success: function (response) {
+                        console.log(response.negative, response.positive, response.neutral);
 
-                var data = [{
-                x:['Negative', 'Positive', 'Neutral'], 
-                y: [response.negative, response.positive, response.neutral],
-                type: 'bar'}]
+                        var data = [{
+                            x: ['Negative', 'Positive', 'Neutral'],
+                            y: [response.negative, response.positive, response.neutral],
+                            type: 'bar'
+                        }]
 
-                var layout = {
-                title: 'Haptics Twitter Sentiment',
-                showlegend: false}
+                        var layout = {
+                            title: 'Haptics Twitter Sentiment',
+                            showlegend: false
+                        }
 
-                Plotly.newPlot('myDiv', data, layout, {modeBarButtonsToRemove: ['toImage']})
+                        Plotly.newPlot('myDiv', data, layout, { modeBarButtonsToRemove: ['toImage'] })
 
-			},
-		error: function(error){
-				console.log(error);
-			}
-    })
-    console.log('The response is1 '+response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                })
+                console.log('The response is1 ' + response);
 
 
-    });
-    event.preventDefault();
-});
-
-
-</script>
-<meta name="theme-color" content="#563d7c">
+            });
+            event.preventDefault();
+        });
+    </script>
+    <meta name="theme-color" content="#563d7c">
     <title>Flask App</title>
 </head>
 
 <body>
     {% include 'includes/_navbar.html' %}
-    <div class="container" style="padding-top: 5em;">
-        {% include 'includes/_messages.html' %}
-        <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-        {% block body%} {% endblock%}
-    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <span data-feather="home"></span>
+                                Dashboard <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file"></span>
+                                Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="shopping-cart"></span>
+                                Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="users"></span>
+                                Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="bar-chart-2"></span>
+                                Reports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="layers"></span>
+                                Integrations
+                            </a>
+                        </li>
+                    </ul>
 
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Saved reports</span>
+                        <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Current month
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Last quarter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Social engagement
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Year-end sale
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+                {% block body%} {% endblock%}
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/plots.js') }}"></script>

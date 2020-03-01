@@ -1,0 +1,7 @@
+
+    {% include 'includes/_navbar.html' %}
+    <div class="container" style="padding-top: 5em;">
+        {% include 'includes/_messages.html' %}
+        <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+    {% block body%} {% endblock%}
+    </div>

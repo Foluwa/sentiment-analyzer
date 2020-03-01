@@ -41,7 +41,7 @@ class TwitterStreamListner():
         csvWriter = csv.writer(csvFile)
         csvWriter.writerow(["USERID", "USERNAME", "USERFOLLOWERS", "TEXT", "CREATED", "POLARITY", "SUBJECTIVITY", "SENTIMENT"])
 
-        for tweet in tweepy.Cursor(api.search,q = ['{search_query}'.format(search_query=search_query)], since = "2020-02-20",until = "2020-02-28",lang = "en").items():
+        for tweet in tweepy.Cursor(api.search,q = ['{search_query}'.format(search_query=search_query)], since = "2020-02-02",until = "2020-03-01",lang = "en").items():
 
             print (tweet.created_at, tweet.text)
             tweet_details= TextBlob(tweet.text)
@@ -77,3 +77,11 @@ class TwitterStreamListner():
         neutral = int(neutral)
         positive = int(positive) 
         return neutral, negative, positive
+
+
+    # {% include 'includes/_navbar.html' %}
+    # <div class="container" style="padding-top: 5em;">
+    #     {% include 'includes/_messages.html' %}
+    #     <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+    # {% block body%} {% endblock%}
+    # </div>
