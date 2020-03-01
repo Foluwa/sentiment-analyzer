@@ -1,0 +1,61 @@
+USERID,USERNAME,USERFOLLOWERS,TEXT,CREATED,POLARITY,SUBJECTIVITY,SENTIMENT
+1233821014267768838,fantasticfoluwa,921,"RT @fchollet: A deep learning model that can detect COVID-19 pneumonia from CT scans. When used by radiologists, the model can cut reading…",2020-02-29 18:27:07,0.0,0.4,NEUTRAL
+1233650444133638144,fantasticfoluwa,921,RT @jswimp: We be JAMin at HQ @Netlify https://t.co/PUBXxo4M0B,2020-02-29 07:09:20,0.0,0.0,NEUTRAL
+1233649761909125120,fantasticfoluwa,921,"RT @KatieFujihara: Hi, I'm a junior software engineer. You might know me from my hits ""sorry, I have a question,"" ""sorry if this is a silly…",2020-02-29 07:06:38,-0.5,1.0,NEGATIVE
+1233495538206683136,fantasticfoluwa,921,"RT @shelbygrossman: I have never seen Nigerians more proud of their government than they were after they got rid of Ebola so quickly, thank…",2020-02-28 20:53:48,0.5444444444444444,0.6666666666666666,POSITIVE
+1233415561914265600,fantasticfoluwa,921,RT @heyawhite: I am *SO* excited. @Google has released a technical writing course for engineers. This has been in the works for a long time…,2020-02-28 15:36:00,0.10833333333333334,0.4166666666666667,NEGATIVE
+1233414925650931713,fantasticfoluwa,921,RT @nixcraft: How to undo (almost) anything with Git https://t.co/kdY8WuKEVj #goodreads #programming #sysadmin #IT,2020-02-28 15:33:28,0.0,0.0,NEUTRAL
+1233280280884019200,fantasticfoluwa,921,"RT @aproko_doctor: The first case of Coronavirus has been confirmed in Lagos. Patient has been isolated.
+
+The Coronavirus infection is NOT…",2020-02-28 06:38:26,0.325,0.6666666666666666,POSITIVE
+1233268350039601152,fantasticfoluwa,921,"RT @HasuraHQ: 🤔 How do you currently solve #authentication?
+
+Here’s a summary of #AuthN solutions from this #HackerNews thread:
+
+https://t.…",2020-02-28 05:51:02,0.0,0.4,NEUTRAL
+1233266758540283905,fantasticfoluwa,921,"RT @Ri_Githaiga: If the Corona virus outbreak had started in Africa, we'd have been quarantined as a continent.",2020-02-28 05:44:42,0.0,0.0,NEUTRAL
+1232787609879031810,fantasticfoluwa,921,"RT @dammiedammie35: This just came in now 🚨 
+
+No more SARS parade in Ogunstate , you can never see any SARS outside again No more illegal a…",2020-02-26 22:00:44,-0.25,0.3566666666666667,NEGATIVE
+1232429000322097154,fantasticfoluwa,921,"RT @EmmaBostian: *Honest job interview*
+
+Interviewer: “What’s your biggest weakness?”
+
+Me: “Sometimes I fuck up my rebase so badly I delete…",2020-02-25 22:15:45,-0.16666666666666663,0.7222222222222222,NEGATIVE
+1232327108061515776,fantasticfoluwa,921,"RT @hadizel: Caution: Controversial Post.
+Opinions welcome, but pls no abuse.
+
+Dear Young People,
+Times have changed. With the way the worl…",2020-02-25 15:30:52,0.4833333333333334,0.75,POSITIVE
+1232279305679462400,fantasticfoluwa,921,RT @OluyomiOjo: This building gets my angry every single time I’m in Ikoyi and I see it. Monumental waste. https://t.co/BD79IOF1ly,2020-02-25 12:20:55,-0.2571428571428571,0.4047619047619047,NEGATIVE
+1232196304408842241,fantasticfoluwa,921,"RT @jakevdp: Altair 4.0 is released! https://t.co/PCyrIOTcvv
+Try it with:
+
+  pip install -U altair
+
+The full list of changes is at https://…",2020-02-25 06:51:06,0.35,0.55,POSITIVE
+1232032943591317504,fantasticfoluwa,921,"RT @Leila__007: This TikTok has a really good visual representation of a million versus a billion dollars, which is especially relevant now…",2020-02-24 20:01:58,0.5,0.5333333333333333,POSITIVE
+1232027715714330624,fantasticfoluwa,921,RT @bhviyan: boys literally don’t post ANYTHING on social media a guy could be getting married and he’ll only post like the sunset on his s…,2020-02-24 19:41:12,0.09444444444444444,0.4388888888888889,NEGATIVE
+1232000703968817152,fantasticfoluwa,921,"RT @OgbeniDipo: Nigerian Universities are at it again. Just spoke to someone who finished her MSc in 2016, collected Statement of Result in…",2020-02-24 17:53:51,0.0,0.0,NEUTRAL
+1231938931677188098,fantasticfoluwa,921,"RT @EricTopol: @geoffreyhinton @jeremyphoward Geoffrey,
+That's a lot like the question I posed to @pmddomingos in #DeepMedicine. You can gu…",2020-02-24 13:48:24,0.0,0.0,NEUTRAL
+1231548119508234240,fantasticfoluwa,921,"RT @SynStalker: So I'm curious, how did you come up with your Twitter handle?
+
+I'll go first
+
+Synstalker was the main character in a book I…",2020-02-23 11:55:27,0.10555555555555556,0.5555555555555555,NEGATIVE
+1231316450662658049,fantasticfoluwa,921,"RT @NaijaFlyingDr: Macroeconomics actually turned into a series of EIGHT videos featuring Kanye West,Hushpuppi, Alhaji Aliko Dangote (becau…",2020-02-22 20:34:53,0.0,0.1,NEUTRAL
+1231316022948397057,fantasticfoluwa,921,"RT @sheghun_: Done 
+Library has been improved, if you're a Nodejs Developer and you're using @paystack library 
+
+And you need proper intell…",2020-02-22 20:33:11,0.0,0.1,NEUTRAL
+1231289651698262016,fantasticfoluwa,921,work in progress,2020-02-22 18:48:23,0.0,0.0,NEUTRAL
+1231161407045062657,fantasticfoluwa,921,"RT @IkeTheDev: Microsoft deploys 82k times per day. 😲😲
+
+""We have 107k engineers in MS using 1ES. If we save 1 sec its like adding 4 people…",2020-02-22 10:18:47,-0.1,0.6,NEGATIVE
+1231141330929307649,fantasticfoluwa,921,"RT @wuraoyewusi: Next steps in your #DataScience Education.
+
+Now that you can do basic python programming,set up your environment,know some…",2020-02-22 08:59:01,0.0,0.0625,NEUTRAL
+1230947190819971073,fantasticfoluwa,921,"RT @freeCodeCamp: JavaScript isn't an object-oriented programming language - but it still has a way of implementing OOP.
+
+Wanna learn more?…",2020-02-21 20:07:34,0.0,0.0,NEUTRAL

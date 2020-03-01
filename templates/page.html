@@ -2,10 +2,11 @@
 {% block body %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="row">
-        <div class="col-sm-2">
-            <form method="POST">
-                <input id="search_query" class="" value="" name="message" />
-                <button type="submit" id="search_button" value="Search">Search</button>
+        <div class="col-sm-6">
+            <form action="POST" class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                    id="search_query" name="message">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search_button">Search</button>
             </form>
         </div>
     </div>
